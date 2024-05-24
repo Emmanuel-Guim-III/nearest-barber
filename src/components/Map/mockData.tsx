@@ -1,0 +1,67 @@
+export const workers = [
+  {
+    id: '1',
+    firstName: 'John',
+    lastName: 'Doe',
+    rating: 4.5,
+    worksAccomplished: 15,
+    gender: 'Male',
+    contactNumber: '09123456789',
+    coordinates: {
+      lat: 12.932309153165429,
+      lng: 124.12318623809814,
+    },
+  },
+  {
+    id: '2',
+    firstName: 'Jane',
+    lastName: 'Smith',
+    rating: 4.7,
+    worksAccomplished: 18,
+    gender: 'Female',
+    contactNumber: '09234567890',
+    coordinates: {
+      lat: 12.9232953143718,
+      lng: 124.11829388885498,
+    },
+  },
+  {
+    id: '3',
+    firstName: 'Carlos',
+    lastName: 'Gonzalez',
+    rating: 4.3,
+    worksAccomplished: 12,
+    gender: 'Male',
+    contactNumber: '09345678901',
+    coordinates: {
+      lat: 12.925491291166287,
+      lng: 124.12177003173828,
+    },
+  },
+  {
+    id: '4',
+    firstName: 'Maria',
+    lastName: 'Garcia',
+    rating: 4.6,
+    worksAccomplished: 20,
+    gender: 'Female',
+    contactNumber: '09456789012',
+    coordinates: {
+      lat: 12.905162082447374,
+      lng: 124.11636269836426,
+    },
+  },
+  {
+    id: '5',
+    firstName: 'Ling',
+    lastName: 'Chen',
+    rating: 4.4,
+    worksAccomplished: 16,
+    gender: 'Female',
+    contactNumber: '09567890123',
+    coordinates: {
+      lat: 12.862323116216439,
+      lng: 124.14726174621582,
+    },
+  },
+];
