@@ -4,7 +4,7 @@ export function WorkerView({ data }: { data: Worker }) {
   const { firstName, lastName, gender, worksAccomplished, rating } = data;
 
   return (
-    <div className="bg-gray-100">
+    <div className='bg-gray-100'>
       <h1>
         {firstName} {lastName}
       </h1>

@@ -41,23 +41,6 @@ export function MyMap() {
     setWorkersWithinBound(withinBounds);
   };
 
-  const getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          console.log(position.coords);
-          setCenter({ lat: latitude, lng: longitude });
-        },
-        (error) => {
-          console.error('Error get user location: ', error);
-        }
-      );
-    } else {
-      console.log('Geolocation is not supported by this browser');
-    }
-  };
-
   return (
     <APIProvider apiKey={G_MAPS_API_KEY}>
       <Map
@@ -85,10 +68,7 @@ export function MyMap() {
           </InfoWindow>
         )}
 
-        <MapActionButtons
-          onCurrentLocationClick={getUserLocation}
-          total={workersWithinBound.length}
-        />
+        <MapActionButtons data={workersWithinBound} onRecenter={setCenter} />
       </Map>
     </APIProvider>
   );
