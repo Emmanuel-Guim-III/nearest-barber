@@ -5,11 +5,11 @@ import {
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
-import { MapActionButtons } from '../MapActionButtons.tsx';
-import { WorkerView } from '../WorkerView/index.tsx';
-import { Worker, WorkersMarkers } from '../WorkersMarkers/index.tsx';
+import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
+import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
+import { workers } from '../mockData.tsx';
+import { MapActionButtons } from './MapActionButtons.tsx';
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
-import { workers } from './mockData.tsx';
 
 export function MyMap() {
   const [center, setCenter] = useState({

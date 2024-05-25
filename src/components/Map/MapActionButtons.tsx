@@ -1,6 +1,7 @@
 import { FaLocationCrosshairs } from 'react-icons/fa6';
+import { Worker } from '../Worker/WorkerView';
 import { MapSearchbar } from './MapSearchbar';
-import { Worker } from './WorkersMarkers';
+import { ViewNResults } from './ViewNResult';
 
 export type RecenterEvent = (center: { lat: number; lng: number }) => void;
 
@@ -38,9 +39,7 @@ export function MapActionButtons({ data, onRecenter }: Props) {
         <FaLocationCrosshairs />
       </button>
 
-      <button className='absolute bottom-0 left-0 right-0 mx-auto w-fit !rounded-[0px] !rounded-t-xl bg-accent px-3 py-1 text-white shadow'>
-        VIEW {data.length} RESULTS
-      </button>
+      <ViewNResults data={data} />
     </>
   );
 }

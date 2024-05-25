@@ -1,6 +1,6 @@
 import { Marker } from '@vis.gl/react-google-maps';
 import { Fragment } from 'react/jsx-runtime';
-import { workers } from '../Map/mockData';
+import { Worker } from './WorkerView';
 
 type Props = {
   workersList: Worker[];
@@ -11,8 +11,6 @@ type WorkerMarkerProps = {
   data: Worker;
   onInspectWorker: (w: Worker) => void;
 };
-
-export type Worker = (typeof workers)[number];
 
 export function WorkersMarkers({ workersList, onInspectWorker }: Props) {
   const WorkerMarker = ({ data, onInspectWorker }: WorkerMarkerProps) => {

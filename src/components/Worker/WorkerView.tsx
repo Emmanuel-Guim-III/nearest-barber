@@ -1,5 +1,7 @@
 import { FaRegStar, FaStar, FaStarHalfAlt } from 'react-icons/fa';
-import { Worker } from '../WorkersMarkers';
+import { workers } from '../mockData';
+
+export type Worker = (typeof workers)[number];
 
 export function WorkerView({ data }: { data: Worker }) {
   const { firstName, lastName, jobsAccomplished, rating, image } = data;
