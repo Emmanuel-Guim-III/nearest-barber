@@ -4,11 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: '#5d6043',
-        accent: '#925b42',
-        'brand-light': '#aaab96',
-        'accent-light': '#cbbca7',
-        base: '#ede9e3',
+        brand: '#5D6043',
+        accent: '#925B42',
+        'brand-light': '#AAAB96',
+        'accent-light': '#CBBCA7',
+        'yellow-star': '#EAC612',
+        base: '#EDE9E3',
         primary: '#272930',
         secondary: '#646872',
         tertiary: '#81848F',
@@ -16,4 +17,4 @@ export default {
     },
   },
   plugins: [],
-};
+}
