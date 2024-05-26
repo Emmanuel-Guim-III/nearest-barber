@@ -1,7 +1,7 @@
 import { FaSearch } from 'react-icons/fa';
 import { GoogleAutoComplete } from './GoogleAutoComplete';
-import { RecenterEvent } from './MapActionButtons';
 
+export type RecenterEvent = (center: { lat: number; lng: number }) => void;
 type Props = { onRecenter: RecenterEvent };
 
 export function MapSearchbar({ onRecenter }: Props) {

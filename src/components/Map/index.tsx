@@ -5,10 +5,12 @@ import {
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
+import { ViewNResults } from '../Worker/ViewNResult.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
 import { workers } from '../mockData.tsx';
-import { MapActionButtons } from './MapActionButtons.tsx';
+import { CurrentLocationButton } from './CurrentLocationButton.tsx';
+import { MapSearchbar } from './MapSearchbar.tsx';
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
@@ -54,6 +56,8 @@ export function MyMap() {
           setCenter({ lat: e.detail.center.lat, lng: e.detail.center.lng })
         }
       >
+        <MapSearchbar onRecenter={setCenter} />
+
         <WorkersMarkers
           workersList={workers}
           onInspectWorker={setWorkerToInspect}
@@ -68,7 +72,9 @@ export function MyMap() {
           </InfoWindow>
         )}
 
-        <MapActionButtons data={workersWithinBound} onRecenter={setCenter} />
+        <CurrentLocationButton onRecenter={setCenter} />
+
+        <ViewNResults data={workersWithinBound} />
       </Map>
     </APIProvider>
   );
