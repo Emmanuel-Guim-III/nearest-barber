@@ -16,7 +16,7 @@ export function MapSearchbar({ onRecenter }: Props) {
   };
 
   return (
-    <div className='absolute top-10 w-full px-2'>
+    <div className='absolute top-7 w-full px-2'>
       <div className='mx-auto flex max-w-[500px] items-center gap-2 rounded-lg bg-base/90 px-4 py-2 shadow-lg'>
         <FaSearch className='text-[20px] text-tertiary' />
 

@@ -12,17 +12,18 @@ export function WorkerList({ data }: { data: Worker[] }) {
 
       <CollapsibleSection isOpen={isOpen}>
         <div
-          className='flex justify-center gap-4 p-4'
           style={{
             WebkitOverflowScrolling: 'touch',
             overflowY: 'auto',
           }}
         >
-          {data.map((worker, i) => (
-            <Fragment key={i}>
-              <WorkerView data={worker} />
-            </Fragment>
-          ))}
+          <div className='flex w-full min-w-fit justify-center gap-2 p-2'>
+            {data.map((worker, i) => (
+              <Fragment key={i}>
+                <WorkerView data={worker} />
+              </Fragment>
+            ))}
+          </div>
         </div>
       </CollapsibleSection>
     </>
@@ -39,7 +40,7 @@ function CollapsibleSection({
   return (
     <>
       {isOpen && (
-        <div className='absolute bottom-7 w-full rotate-180 '>
+        <div className='absolute bottom-7 w-full rotate-180'>
           <div className='rotate-180'>{children}</div>
         </div>
       )}
