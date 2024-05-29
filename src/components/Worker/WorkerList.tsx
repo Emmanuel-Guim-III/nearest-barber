@@ -11,7 +11,13 @@ export function WorkerList({ data }: { data: Worker[] }) {
       <WorkerListToggle data={data} isToggledOn={isOpen} onToggle={setIsOpen} />
 
       <CollapsibleSection isOpen={isOpen}>
-        <div className='flex gap-4 overflow-auto p-4'>
+        <div
+          className='flex justify-center gap-4 p-4'
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            overflowY: 'auto',
+          }}
+        >
           {data.map((worker, i) => (
             <Fragment key={i}>
               <WorkerView data={worker} />

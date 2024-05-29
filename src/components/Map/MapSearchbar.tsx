@@ -16,8 +16,8 @@ export function MapSearchbar({ onRecenter }: Props) {
   };
 
   return (
-    <div className='absolute left-0 right-0 top-10 bg-transparent px-2 '>
-      <div className='flex w-full items-center gap-2 rounded-lg bg-base/90 px-4 py-2 shadow-lg'>
+    <div className='absolute top-10 w-full px-2'>
+      <div className='mx-auto flex max-w-[500px] items-center gap-2 rounded-lg bg-base/90 px-4 py-2 shadow-lg'>
         <FaSearch className='text-[20px] text-tertiary' />
 
         <GoogleAutoComplete
