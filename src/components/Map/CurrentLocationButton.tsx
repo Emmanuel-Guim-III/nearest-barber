@@ -23,7 +23,7 @@ export function CurrentLocationButton({ onRecenter }: Props) {
 
   return (
     <button
-      className='absolute right-0 top-[calc(100vh-250px)] mx-2 rounded-full bg-accent p-2 text-[24px] text-white shadow'
+      className='absolute right-0 top-[calc(100vh-300px)] mx-2 rounded-full bg-accent p-2 text-[24px] text-white shadow'
       onClick={getUserLocation}
     >
       <FaLocationCrosshairs />

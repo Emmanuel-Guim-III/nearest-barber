@@ -5,7 +5,7 @@ import {
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
-import { ViewNResults } from '../Worker/ViewNResult.tsx';
+import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
 import { workers } from '../mockData.tsx';
@@ -46,7 +46,12 @@ export function MyMap() {
   return (
     <APIProvider apiKey={G_MAPS_API_KEY}>
       <Map
-        style={{ width: '100vw', height: '100vh', position: 'relative' }}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
         defaultCenter={center}
         center={center}
         defaultZoom={15}
@@ -74,7 +79,9 @@ export function MyMap() {
 
         <CurrentLocationButton onRecenter={setCenter} />
 
-        <ViewNResults data={workersWithinBound} />
+        {workersWithinBound.length > 0 && (
+          <WorkerList data={workersWithinBound} />
+        )}
       </Map>
     </APIProvider>
   );

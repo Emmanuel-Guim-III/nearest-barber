@@ -22,19 +22,24 @@ export function WorkerView({ data }: { data: Worker }) {
       stars.push(<FaRegStar />);
     }
 
-    return <div className='text-yellow-star flex gap-1 text-lg'>{stars}</div>;
+    return <div className='flex gap-1 text-lg text-yellow-star'>{stars}</div>;
   };
 
   return (
-    <div className='flex flex-col items-center gap-[6px] rounded p-1'>
-      <img src={image} className='size-[50px] rounded-full' />
-      <p className='text-[24px] leading-6'>
-        {firstName} {lastName}
-      </p>
-      <Stars count={rating} />
-      <p className='text-sm leading-[14px]'>
-        {jobsAccomplished} jobs accomplished
-      </p>
+    <div className='flex w-[150px] flex-col items-center gap-3 rounded bg-base p-3 shadow-md'>
+      <div className='flex flex-col items-center gap-2'>
+        <img src={image} className='size-[50px] rounded-full' />
+        <p className='min-h-9 text-lg leading-[18px]'>
+          {firstName} {lastName}
+        </p>
+      </div>
+
+      <div className='flex flex-col items-center gap-2'>
+        <Stars count={rating} />
+        <p className='text-sm leading-[14px]'>
+          {jobsAccomplished} jobs accomplished
+        </p>
+      </div>
     </div>
   );
 }
