@@ -19,6 +19,8 @@ export function MyMap() {
     lng: 124.1228,
   });
 
+  const [zoom, setZoom] = useState(15);
+
   const [workerToInspect, setWorkerToInspect] = useState<Worker | null>(null);
   const [workersWithinBound, setWorkersWithinBound] = useState<Worker[]>([]);
 
@@ -54,12 +56,13 @@ export function MyMap() {
         }}
         defaultCenter={center}
         center={center}
-        defaultZoom={15}
+        zoom={zoom}
         disableDefaultUI={true}
         onBoundsChanged={handleBoundsChanged}
         onCenterChanged={(e) =>
           setCenter({ lat: e.detail.center.lat, lng: e.detail.center.lng })
         }
+        onZoomChanged={(e) => setZoom(e.detail.zoom)}
       >
         <MapSearchbar onRecenter={setCenter} />
 
@@ -77,7 +80,12 @@ export function MyMap() {
           </InfoWindow>
         )}
 
-        <CurrentLocationButton onRecenter={setCenter} />
+        <CurrentLocationButton
+          onRecenter={(coords) => {
+            setCenter(coords);
+            setZoom(15);
+          }}
+        />
 
         {workersWithinBound.length > 0 && (
           <WorkerList data={workersWithinBound} />

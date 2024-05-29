@@ -9,11 +9,14 @@ export function CurrentLocationButton({ onRecenter }: Props) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log(position.coords);
           onRecenter({ lat: latitude, lng: longitude });
         },
         (error) => {
-          console.error('Error get user location: ', error);
+          alert(error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 5000,
         },
       );
     } else {
@@ -23,7 +26,7 @@ export function CurrentLocationButton({ onRecenter }: Props) {
 
   return (
     <button
-      className='absolute right-0 top-[calc(100vh-300px)] mx-2 rounded-full bg-accent p-2 text-[24px] text-white shadow'
+      className='absolute right-0 top-[calc(100vh-300px)] mx-2 rounded-full bg-brand p-2 text-[24px] text-white shadow'
       onClick={getUserLocation}
     >
       <FaLocationCrosshairs />

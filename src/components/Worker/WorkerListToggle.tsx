@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { motion, useAnimationControls } from 'framer-motion';
 import { useEffect } from 'react';
+import { FaUser, FaUsers } from 'react-icons/fa';
 import { FaXmark } from 'react-icons/fa6';
 import { useSwipeable } from 'react-swipeable';
 import { Worker } from './WorkerView';
@@ -47,11 +48,21 @@ export function WorkerListToggle({ data, isToggledOn, onToggle }: Props) {
         className={classNames(
           'mx-auto w-fit shadow-md',
           isToggledOn
-            ? '!rounded-full bg-accent/70 p-2 text-white/70'
-            : 'flex items-center justify-center !rounded-[0px] !rounded-t-xl bg-accent px-3 py-1 text-white',
+            ? '!rounded-full bg-brand/70 p-2 text-white/70'
+            : 'flex items-center justify-center !rounded-[0px] !rounded-t-xl bg-brand px-3 py-1 text-white',
         )}
       >
-        {isToggledOn ? <FaXmark /> : `VIEW ${data.length} RESULTS`}
+        {isToggledOn ? (
+          <FaXmark />
+        ) : (
+          <div className='flex items-center gap-[6px]'>
+            {data.length > 1 ? <FaUsers /> : <FaUser className='text-xs' />}
+
+            <p>
+              VIEW {data.length} RESULT{data.length > 1 && 'S'}
+            </p>
+          </div>
+        )}
       </motion.button>
     </div>
   );
