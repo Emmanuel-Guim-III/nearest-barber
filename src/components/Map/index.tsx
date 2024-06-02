@@ -4,7 +4,7 @@ import {
   Map,
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
@@ -20,13 +20,9 @@ export function MyMap() {
   });
 
   const [zoom, setZoom] = useState(15);
-
   const [workerToInspect, setWorkerToInspect] = useState<Worker | null>(null);
   const [workersWithinBound, setWorkersWithinBound] = useState<Worker[]>([]);
-
-  useEffect(() => {
-    console.log(workerToInspect);
-  }, [workerToInspect]);
+  const [isDragging, setIsDragging] = useState(false);
 
   const handleBoundsChanged = (e: MapCameraChangedEvent) => {
     const { bounds } = e.detail;
@@ -63,13 +59,17 @@ export function MyMap() {
           setCenter({ lat: e.detail.center.lat, lng: e.detail.center.lng })
         }
         onZoomChanged={(e) => setZoom(e.detail.zoom)}
+        onDragstart={() => setIsDragging(true)}
+        onDragend={() => setIsDragging(false)}
       >
         <MapSearchbar onRecenter={setCenter} />
 
-        <WorkersMarkers
-          workersList={workers}
-          onInspectWorker={setWorkerToInspect}
-        />
+        {!isDragging && (
+          <WorkersMarkers
+            workersList={workers}
+            onInspectWorker={setWorkerToInspect}
+          />
+        )}
 
         {workerToInspect && (
           <InfoWindow
