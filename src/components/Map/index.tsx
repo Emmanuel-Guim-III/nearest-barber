@@ -5,10 +5,12 @@ import {
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
+import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
 import { workers } from '../mockData.tsx';
-import { MapActionButtons } from './MapActionButtons.tsx';
+import { CurrentLocationButton } from './CurrentLocationButton.tsx';
+import { MapSearchbar } from './MapSearchbar.tsx';
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
@@ -16,6 +18,8 @@ export function MyMap() {
     lat: 12.9202,
     lng: 124.1228,
   });
+
+  const [zoom, setZoom] = useState(15);
 
   const [workerToInspect, setWorkerToInspect] = useState<Worker | null>(null);
   const [workersWithinBound, setWorkersWithinBound] = useState<Worker[]>([]);
@@ -44,16 +48,24 @@ export function MyMap() {
   return (
     <APIProvider apiKey={G_MAPS_API_KEY}>
       <Map
-        style={{ width: '100vw', height: '100vh', position: 'relative' }}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
         defaultCenter={center}
         center={center}
-        defaultZoom={15}
+        zoom={zoom}
         disableDefaultUI={true}
         onBoundsChanged={handleBoundsChanged}
         onCenterChanged={(e) =>
           setCenter({ lat: e.detail.center.lat, lng: e.detail.center.lng })
         }
+        onZoomChanged={(e) => setZoom(e.detail.zoom)}
       >
+        <MapSearchbar onRecenter={setCenter} />
+
         <WorkersMarkers
           workersList={workers}
           onInspectWorker={setWorkerToInspect}
@@ -68,7 +80,16 @@ export function MyMap() {
           </InfoWindow>
         )}
 
-        <MapActionButtons data={workersWithinBound} onRecenter={setCenter} />
+        <CurrentLocationButton
+          onRecenter={(coords) => {
+            setCenter(coords);
+            setZoom(15);
+          }}
+        />
+
+        {workersWithinBound.length > 0 && (
+          <WorkerList data={workersWithinBound} />
+        )}
       </Map>
     </APIProvider>
   );
