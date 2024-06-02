@@ -10,7 +10,9 @@ import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
 import { workers } from '../mockData.tsx';
 import { CurrentLocationButton } from './CurrentLocationButton.tsx';
+import { MapNavigationButtons } from './MapNavigationButtons.tsx';
 import { MapSearchbar } from './MapSearchbar.tsx';
+import { MapZoomButtons } from './MapZoomButtons.tsx';
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
@@ -39,6 +41,21 @@ export function MyMap() {
     });
 
     setWorkersWithinBound(withinBounds);
+  };
+
+  const handleRecenter = ({ lat, lng }: { lat: number; lng: number }) => {
+    setCenter((prevCenter) => ({
+      lat: prevCenter.lat + lat,
+      lng: prevCenter.lng + lng,
+    }));
+  };
+
+  const handleZoomIn = () => {
+    setZoom((prevZoom) => prevZoom + 1);
+  };
+
+  const handleZoomOut = () => {
+    setZoom((prevZoom) => prevZoom - 1);
   };
 
   return (
@@ -80,12 +97,16 @@ export function MyMap() {
           </InfoWindow>
         )}
 
+        <MapNavigationButtons onRecenter={handleRecenter} />
+
         <CurrentLocationButton
           onRecenter={(coords) => {
             setCenter(coords);
             setZoom(15);
           }}
         />
+
+        <MapZoomButtons onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
 
         {workersWithinBound.length > 0 && (
           <WorkerList data={workersWithinBound} />
