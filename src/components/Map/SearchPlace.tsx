@@ -4,7 +4,7 @@ import { GoogleAutoComplete } from './GoogleAutoComplete';
 export type RecenterEvent = (coords: { lat: number; lng: number }) => void;
 type Props = { onRecenter: RecenterEvent };
 
-export function MapSearchbar({ onRecenter }: Props) {
+export function SearchPlace({ onRecenter }: Props) {
   const handlePlaceSelect = (place: google.maps.places.PlaceResult | null) => {
     const lat = place?.geometry?.location?.lat();
     const lng = place?.geometry?.location?.lng();

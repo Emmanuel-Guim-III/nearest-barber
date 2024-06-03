@@ -1,5 +1,5 @@
 import { FaLocationCrosshairs } from 'react-icons/fa6';
-import { RecenterEvent } from './MapSearchbar';
+import { RecenterEvent } from './SearchPlace';
 
 type Props = { onRecenter: RecenterEvent };
 

@@ -6,19 +6,19 @@ import {
   FaArrowUp,
 } from 'react-icons/fa';
 
-import { RecenterEvent } from './MapSearchbar';
+import { RecenterEvent } from './SearchPlace';
 
-type MapNavigationButtonProps = {
+type NavigationButtonProps = {
   children: ReactNode;
   onPress: () => void;
   onRelease: () => void;
 };
 
-export function MapNavigationButton({
+export function NavigationButton({
   children,
   onPress,
   onRelease,
-}: MapNavigationButtonProps) {
+}: NavigationButtonProps) {
   return (
     <button
       onMouseDown={onPress}
@@ -35,7 +35,7 @@ export function MapNavigationButton({
 
 type Props = { onRecenter: RecenterEvent };
 
-export function MapNavigationButtons({ onRecenter }: Props) {
+export function NavigationButtons({ onRecenter }: Props) {
   const moveStep = 0.005; // Adjust this value for desired movement distance
   const [intervalId, setIntervalId] = useState<number | null>(null);
 
@@ -68,35 +68,35 @@ export function MapNavigationButtons({ onRecenter }: Props) {
   return (
     <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
       <div className='flex flex-col items-center'>
-        <MapNavigationButton
+        <NavigationButton
           onPress={() => handlePress(moveUp)}
           onRelease={handleRelease}
         >
           <FaArrowUp />
-        </MapNavigationButton>
+        </NavigationButton>
 
         <div className='flex gap-[34px]'>
-          <MapNavigationButton
+          <NavigationButton
             onPress={() => handlePress(moveLeft)}
             onRelease={handleRelease}
           >
             <FaArrowLeft />
-          </MapNavigationButton>
+          </NavigationButton>
 
-          <MapNavigationButton
+          <NavigationButton
             onPress={() => handlePress(moveRight)}
             onRelease={handleRelease}
           >
             <FaArrowRight />
-          </MapNavigationButton>
+          </NavigationButton>
         </div>
 
-        <MapNavigationButton
+        <NavigationButton
           onPress={() => handlePress(moveDown)}
           onRelease={handleRelease}
         >
           <FaArrowDown />
-        </MapNavigationButton>
+        </NavigationButton>
       </div>
     </div>
   );

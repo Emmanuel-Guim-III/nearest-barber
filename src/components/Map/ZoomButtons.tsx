@@ -2,7 +2,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 
 type Props = { onZoomIn: () => void; onZoomOut: () => void };
 
-export function MapZoomButtons({ onZoomIn, onZoomOut }: Props) {
+export function ZoomButtons({ onZoomIn, onZoomOut }: Props) {
   const buttonStyles =
     'rounded-full bg-brand p-[11px] text-[18px] text-white shadow-md';
 

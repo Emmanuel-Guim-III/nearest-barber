@@ -10,9 +10,9 @@ import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
 import { workers } from '../mockData.tsx';
 import { CurrentLocationButton } from './CurrentLocationButton.tsx';
-import { MapNavigationButtons } from './MapNavigationButtons.tsx';
-import { MapSearchbar } from './MapSearchbar.tsx';
-import { MapZoomButtons } from './MapZoomButtons.tsx';
+import { NavigationButtons } from './NavigationButtons.tsx';
+import { SearchPlace } from './SearchPlace.tsx';
+import { ZoomButtons } from './ZoomButtons.tsx';
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
@@ -79,7 +79,7 @@ export function MyMap() {
         onDragstart={() => setIsDragging(true)}
         onDragend={() => setIsDragging(false)}
       >
-        <MapSearchbar onRecenter={setCenter} />
+        <SearchPlace onRecenter={setCenter} />
 
         {!isDragging && (
           <WorkersMarkers
@@ -97,7 +97,7 @@ export function MyMap() {
           </InfoWindow>
         )}
 
-        <MapNavigationButtons onRecenter={handleRecenter} />
+        <NavigationButtons onRecenter={handleRecenter} />
 
         <CurrentLocationButton
           onRecenter={(coords) => {
@@ -106,7 +106,7 @@ export function MyMap() {
           }}
         />
 
-        <MapZoomButtons onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
+        <ZoomButtons onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
 
         {workersWithinBound.length > 0 && (
           <WorkerList data={workersWithinBound} />
@@ -115,3 +115,4 @@ export function MyMap() {
     </APIProvider>
   );
 }
+// TODO: Reorganize related files and rename components accordingly
