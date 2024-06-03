@@ -1,5 +1,5 @@
 import { FaSearch } from 'react-icons/fa';
-import { GoogleAutoComplete } from './GoogleAutoComplete';
+import { GoogleAutoComplete } from '../GoogleAutoComplete';
 
 export type RecenterEvent = (coords: { lat: number; lng: number }) => void;
 type Props = { onRecenter: RecenterEvent };

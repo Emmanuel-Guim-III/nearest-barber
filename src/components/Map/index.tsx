@@ -9,10 +9,12 @@ import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
 import { workers } from '../mockData.tsx';
-import { CurrentLocationButton } from './CurrentLocationButton.tsx';
-import { NavigationButtons } from './NavigationButtons.tsx';
-import { SearchPlace } from './SearchPlace.tsx';
-import { ZoomButtons } from './ZoomButtons.tsx';
+import {
+  CurrentLocationButton,
+  NavigationButtons,
+  SearchPlace,
+  ZoomButtons,
+} from './Controls';
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
