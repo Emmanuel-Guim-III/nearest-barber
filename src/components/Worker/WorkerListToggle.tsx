@@ -3,13 +3,14 @@ import { motion, useAnimationControls } from 'framer-motion';
 import { useEffect } from 'react';
 import { FaUser, FaUsers } from 'react-icons/fa';
 import { FaXmark } from 'react-icons/fa6';
-import { useSwipeable } from 'react-swipeable';
+// import { useSwipeable } from 'react-swipeable';
 import { Worker } from './WorkerView';
 
 type Props = {
   data: Worker[];
   isToggledOn: boolean;
-  onToggle: (v: boolean) => void;
+  // onToggle: (v: boolean) => void;
+  onToggle: () => void;
 };
 
 const VARIANTS = {
@@ -30,18 +31,19 @@ export function WorkerListToggle({ data, isToggledOn, onToggle }: Props) {
     controls.start(isToggledOn ? 'open' : 'closed');
   }, [controls, isToggledOn]);
 
-  const handlers = useSwipeable({
-    onSwipedUp: () => onToggle(true),
-    onTap: () => onToggle(false),
-    swipeDuration: 500,
-    preventScrollOnSwipe: true,
-    trackMouse: true,
-  });
+  // const handlers = useSwipeable({
+  //   onSwipedUp: () => onToggle(true),
+  //   onTap: () => onToggle(false),
+  //   swipeDuration: 500,
+  //   preventScrollOnSwipe: true,
+  //   trackMouse: true,
+  // });
 
   return (
     <div className='absolute bottom-0 left-0 right-0'>
       <motion.button
-        {...handlers}
+        // {...handlers}
+        onClick={onToggle}
         animate={controls}
         transition={SPRING}
         variants={VARIANTS}

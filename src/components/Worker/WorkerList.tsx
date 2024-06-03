@@ -3,12 +3,15 @@ import { WorkerListToggle } from './WorkerListToggle';
 import { Worker, WorkerView } from './WorkerView';
 
 export function WorkerList({ data }: { data: Worker[] }) {
-  // const workerListRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <WorkerListToggle data={data} isToggledOn={isOpen} onToggle={setIsOpen} />
+      <WorkerListToggle
+        data={data}
+        isToggledOn={isOpen}
+        onToggle={() => setIsOpen((prevState) => !prevState)}
+      />
 
       <CollapsibleSection isOpen={isOpen}>
         <div
