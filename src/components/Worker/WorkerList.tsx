@@ -1,14 +1,18 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, ReactNode, useState } from 'react';
 import { WorkerListToggle } from './WorkerListToggle';
 import { Worker, WorkerView } from './WorkerView';
 
 export function WorkerList({ data }: { data: Worker[] }) {
-  // const workerListRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <WorkerListToggle data={data} isToggledOn={isOpen} onToggle={setIsOpen} />
+      <WorkerListToggle
+        data={data}
+        isToggledOn={isOpen}
+        onToggle={() => setIsOpen((prevState) => !prevState)}
+      />
 
       <CollapsibleSection isOpen={isOpen}>
         <div
@@ -17,12 +21,21 @@ export function WorkerList({ data }: { data: Worker[] }) {
             overflowY: 'auto',
           }}
         >
-          <div className='flex w-full min-w-fit justify-center gap-2 p-2'>
-            {data.map((worker, i) => (
-              <Fragment key={i}>
-                <WorkerView data={worker} />
-              </Fragment>
-            ))}
+          <div className='flex w-full min-w-fit justify-center gap-2 overflow-hidden p-2'>
+            <AnimatePresence>
+              {data.map((worker, i) => (
+                <Fragment key={i}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 50 }}
+                    transition={{ duration: 0.1, ease: 'easeInOut' }}
+                  >
+                    <WorkerView data={worker} />
+                  </motion.div>
+                </Fragment>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </CollapsibleSection>

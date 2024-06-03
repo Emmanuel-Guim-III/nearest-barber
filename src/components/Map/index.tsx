@@ -4,29 +4,32 @@ import {
   Map,
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useBreakpoint } from '../../hooks/useBreakpoin.tsx';
 import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
 import { workers } from '../mockData.tsx';
-import { CurrentLocationButton } from './CurrentLocationButton.tsx';
-import { MapSearchbar } from './MapSearchbar.tsx';
+import {
+  CurrentLocationButton,
+  NavigationButtons,
+  SearchPlace,
+  ZoomButtons,
+} from './Controls';
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
+  const { isMobile } = useBreakpoint();
+
   const [center, setCenter] = useState({
     lat: 12.9202,
     lng: 124.1228,
   });
 
   const [zoom, setZoom] = useState(15);
-
   const [workerToInspect, setWorkerToInspect] = useState<Worker | null>(null);
   const [workersWithinBound, setWorkersWithinBound] = useState<Worker[]>([]);
-
-  useEffect(() => {
-    console.log(workerToInspect);
-  }, [workerToInspect]);
+  const [isDragging, setIsDragging] = useState(false);
 
   const handleBoundsChanged = (e: MapCameraChangedEvent) => {
     const { bounds } = e.detail;
@@ -43,6 +46,21 @@ export function MyMap() {
     });
 
     setWorkersWithinBound(withinBounds);
+  };
+
+  const handleRecenter = ({ lat, lng }: { lat: number; lng: number }) => {
+    setCenter((prevCenter) => ({
+      lat: prevCenter.lat + lat,
+      lng: prevCenter.lng + lng,
+    }));
+  };
+
+  const handleZoomIn = () => {
+    setZoom((prevZoom) => prevZoom + 1);
+  };
+
+  const handleZoomOut = () => {
+    setZoom((prevZoom) => prevZoom - 1);
   };
 
   return (
@@ -63,22 +81,28 @@ export function MyMap() {
           setCenter({ lat: e.detail.center.lat, lng: e.detail.center.lng })
         }
         onZoomChanged={(e) => setZoom(e.detail.zoom)}
+        onDragstart={() => setIsDragging(true)}
+        onDragend={() => setIsDragging(false)}
       >
-        <MapSearchbar onRecenter={setCenter} />
+        <SearchPlace onRecenter={setCenter} />
 
-        <WorkersMarkers
-          workersList={workers}
-          onInspectWorker={setWorkerToInspect}
-        />
+        {!isDragging && (
+          <WorkersMarkers
+            workersList={workers}
+            onInspectWorker={setWorkerToInspect}
+          />
+        )}
 
         {workerToInspect && (
           <InfoWindow
             position={workerToInspect?.coordinates}
             onClose={() => setWorkerToInspect(null)}
           >
-            <WorkerView data={workerToInspect} />
+            <WorkerView data={workerToInspect} isInspectMode />
           </InfoWindow>
         )}
+
+        {isMobile && <NavigationButtons onRecenter={handleRecenter} />}
 
         <CurrentLocationButton
           onRecenter={(coords) => {
@@ -86,6 +110,8 @@ export function MyMap() {
             setZoom(15);
           }}
         />
+
+        <ZoomButtons onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
 
         {workersWithinBound.length > 0 && (
           <WorkerList data={workersWithinBound} />
