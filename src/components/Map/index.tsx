@@ -5,6 +5,7 @@ import {
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
 import { useState } from 'react';
+import { useBreakpoint } from '../../hooks/useBreakpoin.tsx';
 import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
@@ -18,6 +19,8 @@ import {
 import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
+  const { isMobile } = useBreakpoint();
+
   const [center, setCenter] = useState({
     lat: 12.9202,
     lng: 124.1228,
@@ -99,7 +102,7 @@ export function MyMap() {
           </InfoWindow>
         )}
 
-        <NavigationButtons onRecenter={handleRecenter} />
+        {isMobile && <NavigationButtons onRecenter={handleRecenter} />}
 
         <CurrentLocationButton
           onRecenter={(coords) => {
@@ -117,4 +120,3 @@ export function MyMap() {
     </APIProvider>
   );
 }
-// TODO: Reorganize related files and rename components accordingly
