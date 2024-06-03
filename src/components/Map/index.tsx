@@ -98,7 +98,7 @@ export function MyMap() {
             position={workerToInspect?.coordinates}
             onClose={() => setWorkerToInspect(null)}
           >
-            <WorkerView data={workerToInspect} />
+            <WorkerView data={workerToInspect} isInspectMode />
           </InfoWindow>
         )}
 

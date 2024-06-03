@@ -49,7 +49,7 @@ export function WorkerListToggle({ data, isToggledOn, onToggle }: Props) {
           'mx-auto w-fit shadow-md',
           isToggledOn
             ? '!rounded-full bg-brand/70 p-2 text-white/70'
-            : 'flex items-center justify-center !rounded-[0px] !rounded-t-xl bg-brand px-3 py-1 text-white',
+            : 'flex items-center justify-center !rounded-[0px] !rounded-t-2xl bg-brand px-3 py-1 text-white',
         )}
       >
         {isToggledOn ? (
