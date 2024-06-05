@@ -5,8 +5,7 @@ import {
   FaArrowRight,
   FaArrowUp,
 } from 'react-icons/fa';
-
-import { RecenterEvent } from './SearchPlace';
+import { MapRecenterEvent } from './CurrentLocationButton';
 
 type NavigationButtonProps = {
   children: ReactNode;
@@ -33,7 +32,7 @@ export function NavigationButton({
   );
 }
 
-type Props = { onRecenter: RecenterEvent };
+type Props = { onRecenter: MapRecenterEvent };
 
 export function NavigationButtons({ onRecenter }: Props) {
   const moveStep = 0.005; // Adjust this value for desired movement distance
