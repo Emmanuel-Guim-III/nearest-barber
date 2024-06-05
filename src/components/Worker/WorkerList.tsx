@@ -3,7 +3,12 @@ import { Fragment, ReactNode, useState } from 'react';
 import { WorkerListToggle } from './WorkerListToggle';
 import { Worker, WorkerView } from './WorkerView';
 
-export function WorkerList({ data }: { data: Worker[] }) {
+type Props = {
+  data: Worker[];
+  onSelect: (worker: Worker) => void;
+};
+
+export function WorkerList({ data, onSelect }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -26,10 +31,12 @@ export function WorkerList({ data }: { data: Worker[] }) {
               {data.map((worker, i) => (
                 <Fragment key={i}>
                   <motion.div
+                    className='cursor-pointer'
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 50 }}
                     transition={{ duration: 0.1, ease: 'easeInOut' }}
+                    onClick={() => onSelect(worker)}
                   >
                     <WorkerView data={worker} />
                   </motion.div>

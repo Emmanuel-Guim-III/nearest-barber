@@ -1,5 +1,11 @@
 import classNames from 'classnames';
-import { FaRegStar, FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import {
+  FaEnvelope,
+  FaPhone,
+  FaRegStar,
+  FaStar,
+  FaStarHalfAlt,
+} from 'react-icons/fa';
 import { Fragment } from 'react/jsx-runtime';
 import { workers } from '../mockData';
 
@@ -33,13 +39,20 @@ const Stars = ({ count }: { count: number }) => {
 };
 
 export function WorkerView({ data, isInspectMode = false }: Props) {
-  const { firstName, lastName, jobsAccomplished, rating, image } = data;
+  const {
+    firstName,
+    lastName,
+    jobsAccomplished,
+    rating,
+    image,
+    contactNumber,
+  } = data;
 
   return (
     <div
       className={classNames(
         'flex w-[150px] flex-col items-center rounded-3xl bg-white',
-        isInspectMode ? 'ml-[6px] gap-5 pb-8 pt-0' : 'gap-3 p-3 shadow-md',
+        isInspectMode ? 'ml-[4px] gap-5 pb-2 pt-0' : 'gap-3 p-3 shadow-md',
       )}
     >
       <div className='flex flex-col items-center gap-2'>
@@ -66,6 +79,18 @@ export function WorkerView({ data, isInspectMode = false }: Props) {
           {jobsAccomplished} jobs accomplished
         </p>
       </div>
+
+      {isInspectMode && (
+        <div className='flex w-full justify-between text-lg'>
+          <a href={`tel:${contactNumber}`} className='px-4 py-2'>
+            <FaPhone />
+          </a>
+
+          <a href={`sms:${contactNumber}`} className='px-4 py-2'>
+            <FaEnvelope />
+          </a>
+        </div>
+      )}
     </div>
   );
 }
