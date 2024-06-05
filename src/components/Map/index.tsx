@@ -4,8 +4,9 @@ import {
   Map,
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
-import { useState } from 'react';
-import { useBreakpoint } from '../../hooks/useBreakpoin.tsx';
+import { useEffect, useState } from 'react';
+import { useBreakpoint } from '../../hooks/useBreakpoint.tsx';
+import { useUserLocation } from '../../hooks/useUserLocation.tsx';
 import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
@@ -20,16 +21,17 @@ import { G_MAPS_API_KEY } from './mapConfig.tsx';
 
 export function MyMap() {
   const { isMobile } = useBreakpoint();
+  const { location } = useUserLocation();
 
-  const [center, setCenter] = useState({
-    lat: 12.9202,
-    lng: 124.1228,
-  });
-
+  const [center, setCenter] = useState({ lat: 0, lng: 0 });
   const [zoom, setZoom] = useState(15);
   const [workerToInspect, setWorkerToInspect] = useState<Worker | null>(null);
   const [workersWithinBound, setWorkersWithinBound] = useState<Worker[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    if (location) setCenter(location);
+  }, [location]);
 
   const handleBoundsChanged = (e: MapCameraChangedEvent) => {
     const { bounds } = e.detail;

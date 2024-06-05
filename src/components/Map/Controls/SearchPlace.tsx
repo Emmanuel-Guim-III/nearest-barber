@@ -1,8 +1,8 @@
 import { FaSearch } from 'react-icons/fa';
 import { GoogleAutoComplete } from '../GoogleAutoComplete';
+import { MapRecenterEvent } from './CurrentLocationButton';
 
-export type RecenterEvent = (coords: { lat: number; lng: number }) => void;
-type Props = { onRecenter: RecenterEvent };
+type Props = { onRecenter: MapRecenterEvent };
 
 export function SearchPlace({ onRecenter }: Props) {
   const handlePlaceSelect = (place: google.maps.places.PlaceResult | null) => {
