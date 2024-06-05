@@ -114,7 +114,7 @@ export function MyMap() {
         <ZoomButtons onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
 
         {workersWithinBound.length > 0 && (
-          <WorkerList data={workersWithinBound} />
+          <WorkerList data={workersWithinBound} onSelect={setWorkerToInspect} />
         )}
       </Map>
     </APIProvider>
