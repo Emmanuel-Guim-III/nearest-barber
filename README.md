@@ -1,30 +1,27 @@
-# React + TypeScript + Vite
+# Barber Finder App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+The Barber Finder App is a tool that helps users locate the nearest barbers around their location. This project is part of a portfolio to showcase skills in Vite, React, TypeScript, and Google Maps API. The core features include Google Maps integration, displaying barber locations, viewing barber details, searching for places, and ensuring a responsive user interface.
 
-Currently, two official plugins are available:
+## Tech Stack
+- React
+- TypeScript
+- Google Maps API
+- Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+### Google Maps Integration
+- Embed Google Maps in the application.
+- Focus on the user's current location when the app loads.
+- Allow users to search for addresses or places on the map.
 
-## Expanding the ESLint configuration
+### Display Barber Locations
+- Show barber locations on the map using markers.
+- Display basic information about each barber (name, rating) in info windows when markers are clicked.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Barber Details
+- Clicking on a marker or a list item shows more detailed information about the barber (e.g., address, contact info, ratings, reviews).
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### User Interface
+- Ensure the app is mobile-friendly and works well on different screen sizes.
+- Provide a smooth user experience with intuitive controls and navigation.
