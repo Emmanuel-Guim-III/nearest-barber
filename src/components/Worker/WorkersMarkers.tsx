@@ -20,7 +20,7 @@ export function WorkersMarkers({ workersList, onInspectWorker }: Props) {
     return <Marker position={center} onClick={() => onInspectWorker(data)} />;
   };
 
-  return workersList ? (
+  return workersList.length ? (
     <>
       {workersList.map((worker, i) => (
         <Fragment key={i}>

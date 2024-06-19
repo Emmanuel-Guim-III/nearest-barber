@@ -20,11 +20,26 @@ export function NavigationButton({
 }: NavigationButtonProps) {
   return (
     <button
-      onMouseDown={onPress}
-      onMouseUp={onRelease}
-      onMouseLeave={onRelease}
-      onTouchStart={onPress}
-      onTouchEnd={onRelease}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        onPress();
+      }}
+      onMouseUp={(e) => {
+        e.preventDefault();
+        onRelease();
+      }}
+      onMouseLeave={(e) => {
+        e.preventDefault();
+        onRelease();
+      }}
+      onTouchStart={(e) => {
+        e.preventDefault();
+        onPress();
+      }}
+      onTouchEnd={(e) => {
+        e.preventDefault();
+        onRelease();
+      }}
       className='rounded-full bg-brand/70 p-2 text-white/70 shadow-md'
     >
       {children}
@@ -32,10 +47,9 @@ export function NavigationButton({
   );
 }
 
-type Props = { onRecenter: MapRecenterEvent };
+type Props = { onRecenter: MapRecenterEvent; moveStep?: number };
 
-export function NavigationButtons({ onRecenter }: Props) {
-  const moveStep = 0.005; // Adjust this value for desired movement distance
+export function NavigationButtons({ onRecenter, moveStep = 0.005 }: Props) {
   const [intervalId, setIntervalId] = useState<number | null>(null);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-type Coordinates = {
+export type Coordinates = {
   lat: number;
   lng: number;
 } | null;

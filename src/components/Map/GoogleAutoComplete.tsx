@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 type Props = {
   onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
   className?: string;
+  onFocus?: () => void;
 };
 
-export function GoogleAutoComplete({ onPlaceSelect, className }: Props) {
+export function GoogleAutoComplete({ onPlaceSelect, ...props }: Props) {
   const [placeAutocomplete, setPlaceAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,7 +33,7 @@ export function GoogleAutoComplete({ onPlaceSelect, className }: Props) {
 
   return (
     <div className='autocomplete-container !w-full'>
-      <input ref={inputRef} className={className} />
+      <input ref={inputRef} {...props} />
     </div>
   );
 }
