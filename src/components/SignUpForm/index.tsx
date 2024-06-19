@@ -1,12 +1,22 @@
 import { Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
+import { addWorker } from '../../data/workers';
 import { MyTextInput } from '../InputFields';
 import { LocationSelect } from '../Map/LocationSelect';
 import { UserType } from '../variables';
 import { UserTypeSelect } from './UserTypeSelect';
+
+const initialValues = {
+  firstName: '',
+  lastName: '',
+  contactNumber: '',
+  location: { lat: 0, lng: 0 },
+};
+
+export type Worker = typeof initialValues;
 
 export function SignUpForm() {
   const navigate = useNavigate();
@@ -20,17 +30,19 @@ export function SignUpForm() {
     }
   };
 
+  const handleSubmit = useCallback(async (worker: Worker) => {
+    const data = await addWorker(worker);
+
+    console.log(data);
+  }, []);
+
   return (
     <>
       {userType ? (
         <div className='flex flex-col items-center gap-10 py-10'>
           <h1 className='text-tertiary'>Sign up</h1>
           <Formik
-            initialValues={{
-              firstName: '',
-              lastName: '',
-              contactNumber: '',
-            }}
+            initialValues={initialValues}
             validationSchema={Yup.object({
               firstName: Yup.string()
                 .max(15, 'Must be 20 characters or less')
@@ -43,10 +55,8 @@ export function SignUpForm() {
                 .required('Required'),
             })}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
+              handleSubmit(values);
+              setSubmitting(false);
             }}
           >
             <Form className='flex flex-col items-center gap-4'>

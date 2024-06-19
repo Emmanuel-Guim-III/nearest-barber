@@ -5,12 +5,12 @@ import {
   MapCameraChangedEvent,
 } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
+import { getWorkers } from '../../data/workers.tsx';
 import { useBreakpoint } from '../../hooks/useBreakpoint.tsx';
 import { useUserLocation } from '../../hooks/useUserLocation.tsx';
 import { WorkerList } from '../Worker/WorkerList.tsx';
 import { Worker, WorkerView } from '../Worker/WorkerView.tsx';
 import { WorkersMarkers } from '../Worker/WorkersMarkers.tsx';
-import { workers } from '../mockData.tsx';
 import {
   CurrentLocationButton,
   NavigationButtons,
@@ -23,6 +23,7 @@ export function MyMap() {
   const { isMobile } = useBreakpoint();
   const { location } = useUserLocation();
 
+  const [workers, setWorkers] = useState<Worker[]>([]);
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
   const [zoom, setZoom] = useState(15);
   const [workerToInspect, setWorkerToInspect] = useState<Worker | null>(null);
@@ -33,8 +34,22 @@ export function MyMap() {
     if (location) setCenter(location);
   }, [location]);
 
+  useEffect(() => {
+    const fetchUsersData = async () => {
+      const workersData = await getWorkers();
+
+      console.log('workersData', workersData);
+
+      setWorkers(workersData);
+    };
+
+    fetchUsersData();
+  }, []);
+
   const handleBoundsChanged = (e: MapCameraChangedEvent) => {
     const { bounds } = e.detail;
+
+    if (!workers) return;
 
     const withinBounds = workers.filter((worker) => {
       const { lat, lng } = worker.coordinates;
@@ -90,7 +105,7 @@ export function MyMap() {
 
         {!isDragging && (
           <WorkersMarkers
-            workersList={workers}
+            workersList={workers || []}
             onInspectWorker={setWorkerToInspect}
           />
         )}
