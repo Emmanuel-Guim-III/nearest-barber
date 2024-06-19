@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { MyTextInput } from '../InputFields';
+import { LocationSelect } from '../Map/LocationSelect';
 import { UserType } from '../variables';
 import { UserTypeSelect } from './UserTypeSelect';
 
@@ -22,7 +23,7 @@ export function SignUpForm() {
   return (
     <>
       {userType ? (
-        <div className='flex flex-col items-center gap-10'>
+        <div className='flex flex-col items-center gap-10 py-10'>
           <h1 className='text-tertiary'>Sign up</h1>
           <Formik
             initialValues={{
@@ -48,7 +49,7 @@ export function SignUpForm() {
               }, 400);
             }}
           >
-            <Form className='flex flex-col gap-4'>
+            <Form className='flex flex-col items-center gap-4'>
               <MyTextInput
                 label='First Name'
                 name='firstName'
@@ -69,6 +70,8 @@ export function SignUpForm() {
                 type='number'
                 placeholder='09*********'
               />
+
+              <LocationSelect />
 
               <button
                 className='mt-7 rounded-full bg-brand-light text-2xl text-white'
