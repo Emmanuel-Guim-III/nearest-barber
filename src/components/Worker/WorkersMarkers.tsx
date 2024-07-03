@@ -14,10 +14,12 @@ type WorkerMarkerProps = {
 
 export function WorkersMarkers({ workersList, onInspectWorker }: Props) {
   const WorkerMarker = ({ data, onInspectWorker }: WorkerMarkerProps) => {
-    const { lat, lng } = data.coordinates;
-    const center = { lat, lng };
-
-    return <Marker position={center} onClick={() => onInspectWorker(data)} />;
+    return (
+      <Marker
+        position={data.coordinates}
+        onClick={() => onInspectWorker(data)}
+      />
+    );
   };
 
   return workersList.length ? (

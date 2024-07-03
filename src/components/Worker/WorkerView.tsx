@@ -7,9 +7,20 @@ import {
   FaStarHalfAlt,
 } from 'react-icons/fa';
 import { Fragment } from 'react/jsx-runtime';
-import { workers } from '../mockData';
 
-export type Worker = (typeof workers)[number];
+export type Worker = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  rating: number;
+  jobsAccomplished: number;
+  contactNumber: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  image: string;
+};
 
 type Props = { data: Worker; isInspectMode?: boolean };
 

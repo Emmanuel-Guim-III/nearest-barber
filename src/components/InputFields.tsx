@@ -23,9 +23,9 @@ type SelectProps = {
 };
 
 const styles = {
-  container: 'flex flex-col gap-1 w-[300px]',
+  container: 'flex flex-col gap-1 w-[300px] items-start',
   label: 'ml-[2px] text-brand-light font-bold',
-  input: 'rounded-full px-4 py-2 border border-tertiary text-2xl',
+  input: 'rounded-full px-4 py-2 w-full border text-2xl',
   error: 'text-red-600',
 };
 
@@ -34,15 +34,22 @@ const cx = classNames.bind(styles);
 export const MyTextInput = ({ label, ...props }: TextInputProps) => {
   const [field, meta] = useField(props);
 
+  const hasError = meta.touched && meta.error;
+
   return (
     <div className={cx('container')}>
-      <label className={cx('label')} htmlFor={props.id || props.name}>
+      <label
+        className={cx('label', hasError && 'text-red-400')}
+        htmlFor={props.id || props.name}
+      >
         {label}
       </label>
-      <input className={cx('input')} {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <div className={cx('error')}>{meta.error}</div>
-      ) : null}
+      <input
+        className={cx('input', hasError ? 'border-red-600' : 'border-tertiary')}
+        {...field}
+        {...props}
+      />
+      {hasError ? <div className={cx('error')}>{meta.error}</div> : null}
     </div>
   );
 };

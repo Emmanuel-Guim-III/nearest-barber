@@ -47,19 +47,20 @@ export function MyMap() {
   }, []);
 
   const handleBoundsChanged = (e: MapCameraChangedEvent) => {
+    if (!workers.length) return;
+
     const { bounds } = e.detail;
-
-    if (!workers) return;
-
     const withinBounds = workers.filter((worker) => {
-      const { lat, lng } = worker.coordinates;
+      if (worker.coordinates) {
+        const { lat, lng } = worker.coordinates;
 
-      return (
-        lat >= bounds.south &&
-        lat <= bounds.north &&
-        lng >= bounds.west &&
-        lng <= bounds.east
-      );
+        return (
+          lat >= bounds.south &&
+          lat <= bounds.north &&
+          lng >= bounds.west &&
+          lng <= bounds.east
+        );
+      }
     });
 
     setWorkersWithinBound(withinBounds);

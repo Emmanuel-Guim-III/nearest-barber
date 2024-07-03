@@ -1,20 +1,4 @@
-import { ReactNode } from 'react';
 import { UserType } from '../variables';
-
-const Button = ({
-  children,
-  onClick,
-}: {
-  children: ReactNode;
-  onClick: () => void;
-}) => (
-  <button
-    className='max-w-[200px] rounded-full border-2 border-brand px-5 py-2 text-2xl text-brand shadow-md hover:bg-brand hover:text-white'
-    onClick={onClick}
-  >
-    {children}
-  </button>
-);
 
 export function UserTypeSelect({
   onSelect,
@@ -22,14 +6,30 @@ export function UserTypeSelect({
   onSelect: (userType: UserType) => void;
 }) {
   return (
-    <div className='flex w-full flex-col items-center gap-6'>
-      <Button onClick={() => onSelect(UserType.Worker)}>
-        I'm a hairstylist
-      </Button>
-      <p className='text-xl text-tertiary'>or</p>
-      <Button onClick={() => onSelect(UserType.NonWorker)}>
-        I need a haircut
-      </Button>
+    <div className='flex h-dvh w-full flex-col items-center justify-center gap-[80px] bg-brand'>
+      <h1 className='text-white'>Welcome to Barber Finder!</h1>
+
+      <div className='flex flex-col items-center gap-9 text-white'>
+        <p className='max-w-[300px] text-xl'>
+          How would you like to use our app today?
+        </p>
+
+        <div className='flex w-fit flex-col items-center gap-3'>
+          <button
+            className='w-full rounded-full border-2 border-base bg-base px-9 py-7 text-3xl leading-6 text-brand shadow-md hover:border-base hover:bg-brand hover:text-[#EDE9E3]'
+            onClick={() => onSelect(UserType.NonWorker)}
+          >
+            I need a barber
+          </button>
+          <p className='text-xl leading-5 text-white/50'>or</p>
+          <button
+            className='rounded-full border-2 border-base bg-brand px-6 py-3 text-xl text-[#EDE9E3] shadow-md hover:bg-base hover:text-brand'
+            onClick={() => onSelect(UserType.Worker)}
+          >
+            I'm a barber
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
