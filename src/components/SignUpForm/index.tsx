@@ -30,11 +30,14 @@ export function SignUpForm() {
     }
   };
 
-  const handleSubmit = useCallback(async (worker: Worker) => {
-    const data = await addWorker(worker);
-
-    console.log(data);
-  }, []);
+  const handleSubmit = useCallback(
+    async (worker: Worker) => {
+      const data = await addWorker(worker);
+      //TODO: add success notification
+      if (data) navigate('/map');
+    },
+    [navigate],
+  );
 
   return (
     <>

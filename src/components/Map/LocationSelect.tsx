@@ -47,7 +47,7 @@ export function LocationSelect() {
   return (
     <>
       <APIProvider apiKey={G_MAPS_API_KEY}>
-        <div className='flex w-[300px] flex-col gap-1'>
+        <div className='flex w-[300px] flex-col items-start gap-1'>
           <label className='ml-[2px] font-bold text-brand-light'>
             Location
           </label>
